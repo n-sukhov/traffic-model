@@ -12,12 +12,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(headers_dir ./include)
 set(source_dir ./src)
 
-#set(headers
-#    ${headers_dir}/equal_model.h
-#    ${headers_dir}/poisson_model.h
-#    ${headers_dir}/utils.h
-#)
-
 set(sources
     ${source_dir}/main.cpp
     ${source_dir}/equal_model.cpp

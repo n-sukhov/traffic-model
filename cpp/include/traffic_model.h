@@ -3,11 +3,12 @@
 #include <string>
 #include <random>
 #include <cstdint>
+#include <vector>
 
 
-struct packet {
-    uint32_t size;
+struct Packet {
     double arrival_time;
+    uint32_t size;
 };
 
 class TrafficModel {
@@ -20,7 +21,10 @@ public:
         std::random_device rd;
         rand_gen = std::mt19937(rd());
     }
-    virtual ~TrafficModel();
-    virtual packet generate_next_packet(double current_time) = 0;
-    virtual std::string get_modeal_name() const { return model_name; }
+    virtual ~TrafficModel() = default;
+
+    virtual std::vector<Packet> simulate(double simulation_time) = 0;
+    // Генерация пакетов за время симуляции
+
+    virtual std::string get_model_name() const { return model_name; } // Возвращает тип модели
 };

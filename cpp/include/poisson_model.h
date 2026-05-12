@@ -1,4 +1,5 @@
 #pragma once
+
 #include "traffic_model.h"
 #include <memory>
 #include <string>

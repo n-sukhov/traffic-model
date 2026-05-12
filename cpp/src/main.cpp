@@ -27,8 +27,10 @@ int main(int argc, char** argv) {
     std::unique_ptr<TrafficModel> model = create_model_from_line(model_line);
     std::vector<Packet> packets = model->simulate(simulation_time);
 
+    std::string model_data_dir = model->get_model_name() + "/";
+    ensure_data_dir(DATA_FOLDER + model_data_dir);
     std::filesystem::path input_path(argv[1]);
-    std::string output_filename = input_path.stem().string() + "_traffic.csv";
+    std::string output_filename = model_data_dir + input_path.stem().string() + "_traffic.csv";
     write_packets_to_csv(output_filename, packets);
 
     return 0;

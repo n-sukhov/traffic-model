@@ -11,10 +11,10 @@
 const std::string DATA_FOLDER = "data/";
 
 
-inline void ensure_data_dir() {
+inline void ensure_data_dir(const std::string data_dir) {
     // Проверка наличия папки для сохранения данных / её создание
-    if (!std::filesystem::exists(DATA_FOLDER)) {
-        std::filesystem::create_directory(DATA_FOLDER);
+    if (!std::filesystem::exists(data_dir)) {
+        std::filesystem::create_directory(data_dir);
     }
 }
 
@@ -22,7 +22,7 @@ inline void write_packets_to_csv(
     const std::string& filename,
     const std::vector<Packet>& packets
 ) {
-    ensure_data_dir();
+    ensure_data_dir(DATA_FOLDER);
 
     std::string file_path = DATA_FOLDER + filename;
 

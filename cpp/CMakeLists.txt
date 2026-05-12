@@ -16,6 +16,7 @@ set(sources
     ${source_dir}/main.cpp
     ${source_dir}/equal_model.cpp
     ${source_dir}/poisson_model.cpp
+    ${source_dir}/model_factory.cpp
 )
 
 add_executable(traffic_model ${sources})

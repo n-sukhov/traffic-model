@@ -2,6 +2,7 @@
 #include <cmath>
 #include <algorithm>
 #include <stdexcept>
+#include <sstream>
 
 PoissonModel::PoissonModel(double interval_lambda, double size_lambda, uint32_t max_trans_unit) :
     TrafficModel("poisson"),
@@ -17,6 +18,23 @@ PoissonModel::PoissonModel(double interval_lambda, double size_lambda, uint32_t 
     if (mtu == 0) {
         throw std::invalid_argument("MTU must be positive");
     }
+}
+
+std::unique_ptr<TrafficModel> PoissonModel::create_from_parameters_line(
+    const std::string& parameters
+) {
+    std::istringstream iss(parameters);
+
+    double interval_lambda;
+    double size_lambda;
+    uint32_t max_trans_unit;
+
+    if (!(iss >> interval_lambda >> size_lambda >> max_trans_unit)) {
+        throw std::runtime_error("Invalid poisson model parameters");
+    }
+
+    return std::make_unique<PoissonModel>(interval_lambda, size_lambda, max_trans_unit);
+
 }
 
 std::vector<Packet> PoissonModel::simulate(double simulation_time) {

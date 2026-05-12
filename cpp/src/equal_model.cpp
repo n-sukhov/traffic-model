@@ -1,5 +1,6 @@
 #include "equal_model.h"
 #include <stdexcept>
+#include <sstream>
 
 EqualModel::EqualModel(double interval_sec, uint32_t size_bytes) :
     TrafficModel("equal"),
@@ -8,6 +9,21 @@ EqualModel::EqualModel(double interval_sec, uint32_t size_bytes) :
     if (interval_sec <= 0.0) {
         throw std::invalid_argument("Equal: interval time must be positive");
     }
+}
+
+std::unique_ptr<TrafficModel> EqualModel::create_from_parameters_line(
+    const std::string& parameters
+) {
+    std::istringstream iss(parameters);
+
+    double interval;
+    uint32_t packet_size;
+
+    if (!(iss >> interval >> packet_size)) {
+        throw std::runtime_error("Invalid equal model parameters");
+    }
+
+    return std::make_unique<EqualModel>(interval, packet_size);
 }
 
 std::vector<Packet> EqualModel::simulate(double simulation_time) {

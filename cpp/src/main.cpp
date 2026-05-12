@@ -5,7 +5,7 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
-
+#include <filesystem>
 
 int main(int argc, char** argv) {
     if (argc != 2) {
@@ -27,10 +27,9 @@ int main(int argc, char** argv) {
     std::unique_ptr<TrafficModel> model = create_model_from_line(model_line);
     std::vector<Packet> packets = model->simulate(simulation_time);
 
-    write_packets_to_csv(
-        model->get_model_name() + "_traffic.csv",
-        packets
-    );
+    std::filesystem::path input_path(argv[1]);
+    std::string output_filename = input_path.stem().string() + "_traffic.csv";
+    write_packets_to_csv(output_filename, packets);
 
     return 0;
 }

@@ -14,6 +14,9 @@ EqualModel::EqualModel(double interval_sec, uint32_t size_bytes) :
 std::unique_ptr<TrafficModel> EqualModel::create_from_parameters_line(
     const std::string& parameters
 ) {
+    /* Принимает строку параметров из файла, и на основе неё
+    создает объект
+    */
     std::istringstream iss(parameters);
 
     double interval;
@@ -27,6 +30,9 @@ std::unique_ptr<TrafficModel> EqualModel::create_from_parameters_line(
 }
 
 std::vector<Packet> EqualModel::simulate(double simulation_time) {
+    /*Принимает на вход время симуляции, возвращает массив
+    структур с данными о переданных пакетах
+    */
     std::vector<Packet> packets;
     
     if (simulation_time <= 0.0 || packet_size == 0) {

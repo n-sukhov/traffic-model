@@ -6,6 +6,8 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <sstream>
+#include <iomanip>
 
 
 const std::string DATA_FOLDER = "data/";
@@ -28,6 +30,7 @@ inline void write_packets_to_csv(
     const std::string& filename,
     const std::vector<Packet>& packets
 ) {
+    // Для записи данных с симуляции в csv
     ensure_data_dir(DATA_FOLDER);
 
     std::string file_path = DATA_FOLDER + filename;

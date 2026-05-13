@@ -5,13 +5,16 @@
 #include <stdexcept>
 #include <string>
 
-const char SEPARATOR = ':';
+const std::string SEPARATOR = ":";
 
 std::unique_ptr<TrafficModel> create_model_from_line(const std::string& model_line) {
+    /* Принимает сроку с информацией о модели и её параметрах, на основе неё
+    создает объект модели, передает ей параметры и возвращает указатель на неё
+    */
     size_t sep_idx = model_line.find(SEPARATOR);
 
     if (sep_idx == std::string::npos) {
-        throw std::runtime_error("Model line must contain '" + std::to_string(SEPARATOR) + "'");
+        throw std::runtime_error("Model line must contain '" + SEPARATOR + "'");
     }
 
     std::string model_name = model_line.substr(0, sep_idx);

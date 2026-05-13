@@ -23,6 +23,9 @@ PoissonModel::PoissonModel(double interval_lambda, double size_lambda, uint32_t 
 std::unique_ptr<TrafficModel> PoissonModel::create_from_parameters_line(
     const std::string& parameters
 ) {
+    /* Принимает строку параметров из файла, и на основе неё
+    создает объект
+    */
     std::istringstream iss(parameters);
 
     double interval_lambda;
@@ -38,6 +41,9 @@ std::unique_ptr<TrafficModel> PoissonModel::create_from_parameters_line(
 }
 
 std::vector<Packet> PoissonModel::simulate(double simulation_time) {
+    /*Принимает на вход время симуляции, возвращает массив
+    структур с данными о переданных пакетах
+    */
     std::vector<Packet> packets;
 
     double current_time = 0.0;

@@ -10,11 +10,17 @@
 
 const std::string DATA_FOLDER = "data/";
 
+inline std::string format_double(double x, int precision) {
+    // Форматирование double для записи в названия файлов с заданной точностью
+    std::ostringstream out;
+    out << std::fixed << std::setprecision(precision) << x;
+    return out.str();
+}
 
-inline void ensure_data_dir(const std::string data_dir) {
+inline void ensure_data_dir(const std::string& data_dir) {
     // Проверка наличия папки для сохранения данных / её создание
     if (!std::filesystem::exists(data_dir)) {
-        std::filesystem::create_directory(data_dir);
+        std::filesystem::create_directories(data_dir);
     }
 }
 

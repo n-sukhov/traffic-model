@@ -30,7 +30,10 @@ int main(int argc, char** argv) {
     std::string model_data_dir = model->get_model_name() + "/";
     ensure_data_dir(DATA_FOLDER + model_data_dir);
     std::filesystem::path input_path(argv[1]);
-    std::string output_filename = model_data_dir + input_path.stem().string() + "_traffic.csv";
+    std::string output_filename = 
+        model_data_dir + input_path.stem().string()
+        + "_simtime_" + format_double(simulation_time, 1)
+        + "_traffic.csv";
     write_packets_to_csv(output_filename, packets);
 
     return 0;

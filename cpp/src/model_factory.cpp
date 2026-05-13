@@ -2,6 +2,7 @@
 
 #include "equal_model.h"
 #include "poisson_model.h"
+#include "pareto_model.h"
 #include <stdexcept>
 #include <string>
 
@@ -26,6 +27,8 @@ std::unique_ptr<TrafficModel> create_model_from_line(const std::string& model_li
     if (model_name == "poisson") {
         return PoissonModel::create_from_parameters_line(model_parameters);
     }
-
+    if (model_name == "pareto") {
+        return ParetoModel::create_from_parameters_line(model_parameters);
+    }
     throw std::runtime_error("Unknown traffic model: " + model_name);
 }
